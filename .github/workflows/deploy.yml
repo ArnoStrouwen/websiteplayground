@@ -1,0 +1,21 @@
+name: Publish Website to CPanel
+on:
+  push:
+    branches:
+      - main
+jobs:
+  FTP-Deploy-Action:
+    name: FTP-Deploy-Action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout
+    - uses: jakejarvis/hugo-build-action
+      with:
+        args: --minify
+    - name: FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./public
