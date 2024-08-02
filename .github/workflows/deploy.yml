@@ -8,12 +8,12 @@ jobs:
     name: FTP-Deploy-Action
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout
-    - uses: jakejarvis/hugo-build-action
+    - uses: actions/checkout@4.1.7
+    - uses: jakejarvis/hugo-build-action@0.111
       with:
         args: --minify
     - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@4.3.5 
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
