@@ -1,0 +1,9 @@
+.max-w-prose {
+    max-width: 100ch;
+}
+
+.prose {
+    color: var(--tw-prose-body);
+    max-width: 100ch;
+  }
+  
