@@ -1,0 +1,23 @@
+name: GitHub Pages
+
+on:
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v3
+      with:
+        extended: true
+    - name: Build
+      if: github.event.action != 'closed'
+      run: hugo
+    - name: Deploy preview
+      uses: rossjrw/pr-preview-action@v1
+      with:
+        source-dir: ./public/
