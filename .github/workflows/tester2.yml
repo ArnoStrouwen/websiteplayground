@@ -16,7 +16,7 @@ jobs:
         extended: true
     - name: Build
       if: github.event.action != 'closed'
-      run: hugo
+      run: hugo -b https://arnostrouwen.github.io/websiteplayground/
     - name: Deploy preview
       uses: rossjrw/pr-preview-action@v1
       with:
