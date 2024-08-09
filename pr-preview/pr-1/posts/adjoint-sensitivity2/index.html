@@ -26,7 +26,7 @@
   
   <script
     type="text/javascript"
-    src="/websiteplayground/js/appearance.min.74ad8406faea02f3e186ba5126249aaeed9073629e04b05037b903396b188724.js"
+    src="/websiteplayground/pr-preview/pr-1/js/appearance.min.74ad8406faea02f3e186ba5126249aaeed9073629e04b05037b903396b188724.js"
     integrity="sha256-dK2EBvrqAvPhhrpRJiSaru2Qc2KeBLBQN7kDOWsYhyQ="
   ></script>
   
@@ -42,7 +42,7 @@
   <link
     type="text/css"
     rel="stylesheet"
-    href="/websiteplayground/css/main.bundle.min.b75f42befaf0b4e19edd1684d335ffd171d23211f6c4aca644a79d44a9acaf1e.css"
+    href="/websiteplayground/pr-preview/pr-1/css/main.bundle.min.b75f42befaf0b4e19edd1684d335ffd171d23211f6c4aca644a79d44a9acaf1e.css"
     integrity="sha256-t19CvvrwtOGe3RaE0zX/0XHSMhH2xKymRKedRKmsrx4="
   />
   
@@ -63,7 +63,7 @@
       defer
       type="text/javascript"
       id="script-bundle"
-      src="/websiteplayground/js/main.bundle.min.af5d9722112bedac95702865c340bcd6286c4e9b2c15ce26b531ea1fba974cb8.js"
+      src="/websiteplayground/pr-preview/pr-1/js/main.bundle.min.af5d9722112bedac95702865c340bcd6286c4e9b2c15ce26b531ea1fba974cb8.js"
       integrity="sha256-r12XIhEr7ayVcChlw0C81ihsTpssFc4mtTHqH7qXTLg="
       data-copy="Copy"
       data-copied="Copied"
@@ -92,22 +92,22 @@ Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). W
   
   
   
-  <link rel="canonical" href="https://arnostrouwen.github.io/websiteplayground/posts/adjoint-sensitivity2/" />
+  <link rel="canonical" href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-1/posts/adjoint-sensitivity2/" />
   
   
-    <link rel="apple-touch-icon" sizes="180x180" href="/websiteplayground/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/websiteplayground/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/websiteplayground/favicon-16x16.png" />
-    <link rel="manifest" href="/websiteplayground/site.webmanifest" />
-  
-  
-  
+    <link rel="apple-touch-icon" sizes="180x180" href="/websiteplayground/pr-preview/pr-1/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/websiteplayground/pr-preview/pr-1/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/websiteplayground/pr-preview/pr-1/favicon-16x16.png" />
+    <link rel="manifest" href="/websiteplayground/pr-preview/pr-1/site.webmanifest" />
   
   
   
   
   
-  <meta property="og:url" content="https://arnostrouwen.github.io/websiteplayground/posts/adjoint-sensitivity2/">
+  
+  
+  
+  <meta property="og:url" content="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-1/posts/adjoint-sensitivity2/">
   <meta property="og:site_name" content="Strouwen Statistics">
   <meta property="og:title" content="Notes on adjoint sensitivity analysis of dynamic systems part 2">
   <meta property="og:description" content=" We continue from part 1 with a more rigorous version of the derivation of adjoint sensitivity analysis for continuous time systems, $$\begin{align*} u(0) &amp;= f_0(p)\\ u(t) &amp;= u(0) &#43; \int_0^{t} f(u(q),p,q)dq\\ c(t) &amp;= g(u(t),p,t)\\ G(c) &amp;= \int_0^{t_e } c(s)ds, \end{align*}$$ \(u(t)\) is the dynamic state, which evolution in time is described by the function \(f\). \(c(t)\) is the cost at time \(t\) described by the function \(g\) and \(G\) is the total accumulated cost. Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). We want to calculate the effect \(p\) has on \(G\) using backpropagation.">
@@ -131,9 +131,9 @@ Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). W
     "name": "Notes on adjoint sensitivity analysis of dynamic systems part 2",
     "headline": "Notes on adjoint sensitivity analysis of dynamic systems part 2",
     
-    "abstract": "\u003cp\u003e\n\nWe continue from \u003ca href=\u0022https:\/\/arnostrouwen.github.io\/websiteplayground\/posts\/adjoint-sensitivity\/\u0022\u003epart 1\u003c\/a\u003e with a more rigorous version of the derivation of adjoint sensitivity analysis for continuous time systems,\n$$\\begin{align*}\nu(0) \u0026amp;= f_0(p)\\\\\nu(t) \u0026amp;= u(0) \u002b \\int_0^{t} f(u(q),p,q)dq\\\\\nc(t) \u0026amp;= g(u(t),p,t)\\\\\nG(c) \u0026amp;= \\int_0^{t_e } c(s)ds,\n\\end{align*}$$\n\\(u(t)\\) is the dynamic state, which evolution in time is described by the function \\(f\\).\n\\(c(t)\\) is the cost at time \\(t\\) described by the function \\(g\\) and \\(G\\) is the total accumulated cost.\nBoth \\(g\\) and \\(f\\) are dependent on the parameters \\(p\\) and the time \\(t\\). We want to calculate the effect \\(p\\) has on \\(G\\) using backpropagation.\u003c\/p\u003e",
+    "abstract": "\u003cp\u003e\n\nWe continue from \u003ca href=\u0022https:\/\/arnostrouwen.github.io\/websiteplayground\/pr-preview\/pr-1\/posts\/adjoint-sensitivity\/\u0022\u003epart 1\u003c\/a\u003e with a more rigorous version of the derivation of adjoint sensitivity analysis for continuous time systems,\n$$\\begin{align*}\nu(0) \u0026amp;= f_0(p)\\\\\nu(t) \u0026amp;= u(0) \u002b \\int_0^{t} f(u(q),p,q)dq\\\\\nc(t) \u0026amp;= g(u(t),p,t)\\\\\nG(c) \u0026amp;= \\int_0^{t_e } c(s)ds,\n\\end{align*}$$\n\\(u(t)\\) is the dynamic state, which evolution in time is described by the function \\(f\\).\n\\(c(t)\\) is the cost at time \\(t\\) described by the function \\(g\\) and \\(G\\) is the total accumulated cost.\nBoth \\(g\\) and \\(f\\) are dependent on the parameters \\(p\\) and the time \\(t\\). We want to calculate the effect \\(p\\) has on \\(G\\) using backpropagation.\u003c\/p\u003e",
     "inLanguage": "en",
-    "url" : "https:\/\/arnostrouwen.github.io\/websiteplayground\/posts\/adjoint-sensitivity2\/",
+    "url" : "https:\/\/arnostrouwen.github.io\/websiteplayground\/pr-preview\/pr-1\/posts\/adjoint-sensitivity2\/",
     "author" : {
       "@type": "Person",
       "name": "Arno Strouwen"
@@ -175,21 +175,21 @@ Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). W
   <link
     type="text/css"
     rel="stylesheet"
-    href="/websiteplayground/lib/katex/katex.min.af6f85907cdfd6ed3e4906d93a8233d91c5638859f744cd1b98c9b1a3ccaab5f231bdcda49f132f6cdfe8cca86ff33ed468affab8a9a502610a664a34f0f0cfa.css"
+    href="/websiteplayground/pr-preview/pr-1/lib/katex/katex.min.af6f85907cdfd6ed3e4906d93a8233d91c5638859f744cd1b98c9b1a3ccaab5f231bdcda49f132f6cdfe8cca86ff33ed468affab8a9a502610a664a34f0f0cfa.css"
     integrity="sha512-r2&#43;FkHzf1u0&#43;SQbZOoIz2RxWOIWfdEzRuYybGjzKq18jG9zaSfEy9s3&#43;jMqG/zPtRor/q4qaUCYQpmSjTw8M&#43;g=="
   />
   
   
   <script
     defer
-    src="/websiteplayground/lib/katex/katex.min.20da6cf7343619410c0900fbc626506c65159ea9f312f9729d5cba7aa713707378f9a4222e8f7fb9a42a7240e9749f199b7334401b3e3e4b60e29cf490492552.js"
+    src="/websiteplayground/pr-preview/pr-1/lib/katex/katex.min.20da6cf7343619410c0900fbc626506c65159ea9f312f9729d5cba7aa713707378f9a4222e8f7fb9a42a7240e9749f199b7334401b3e3e4b60e29cf490492552.js"
     integrity="sha512-INps9zQ2GUEMCQD7xiZQbGUVnqnzEvlynVy6eqcTcHN4&#43;aQiLo9/uaQqckDpdJ8Zm3M0QBs&#43;Pktg4pz0kEklUg=="
   ></script>
   
   
   <script
     defer
-    src="/websiteplayground/lib/katex/auto-render.min.6095714e3aadb63b14ddc4af69346ab12974c1b460654345f8d1860a0b68fcc51b22f68b757433193090bb80afc8965b65cb607e5541d0f5f0f4b2e64d69b9ff.js"
+    src="/websiteplayground/pr-preview/pr-1/lib/katex/auto-render.min.6095714e3aadb63b14ddc4af69346ab12974c1b460654345f8d1860a0b68fcc51b22f68b757433193090bb80afc8965b65cb607e5541d0f5f0f4b2e64d69b9ff.js"
     integrity="sha512-YJVxTjqttjsU3cSvaTRqsSl0wbRgZUNF&#43;NGGCgto/MUbIvaLdXQzGTCQu4CvyJZbZctgflVB0PXw9LLmTWm5/w=="
     onload="renderMathInElement(document.body);"
   ></script>
@@ -351,7 +351,7 @@ Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). W
   <a
     class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
     rel="me"
-    href="/websiteplayground/"
+    href="/websiteplayground/pr-preview/pr-1/"
     >Strouwen Statistics</a
   >
 
@@ -365,7 +365,7 @@ Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). W
             <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
               
                 <a
-                  href="/websiteplayground/posts/"
+                  href="/websiteplayground/pr-preview/pr-1/posts/"
                   title=""
                   
                   ><span
@@ -381,7 +381,7 @@ Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). W
             <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
               
                 <a
-                  href="/websiteplayground/ssi/"
+                  href="/websiteplayground/pr-preview/pr-1/ssi/"
                   title=""
                   
                   ><span
@@ -397,7 +397,7 @@ Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). W
             <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
               
                 <a
-                  href="/websiteplayground/about/"
+                  href="/websiteplayground/pr-preview/pr-1/about/"
                   title=""
                   
                   ><span
@@ -413,7 +413,7 @@ Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). W
             <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
               
                 <a
-                  href="/websiteplayground/cv.pdf"
+                  href="/websiteplayground/pr-preview/pr-1/cv.pdf"
                   title=""
                   
                   ><span
@@ -517,7 +517,7 @@ Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). W
       <div class="min-h-0 min-w-0 max-w-prose grow">
         <p>
 
-We continue from <a href="https://arnostrouwen.github.io/websiteplayground/posts/adjoint-sensitivity/">part 1</a> with a more rigorous version of the derivation of adjoint sensitivity analysis for continuous time systems,
+We continue from <a href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-1/posts/adjoint-sensitivity/">part 1</a> with a more rigorous version of the derivation of adjoint sensitivity analysis for continuous time systems,
 $$\begin{align*}
 u(0) &amp;= f_0(p)\\
 u(t) &amp;= u(0) + \int_0^{t} f(u(q),p,q)dq\\
@@ -576,7 +576,7 @@ If we assume that the partial derivative of \(G(c_{[0,t]},u(t),p)\) with regards
 &amp; = -\frac{\partial g(u(t),p,t)}{\partial u(t)} -
 \lambda(t)\frac{\partial f(u(t),p,t)}{\partial u(t)}
 \end{align*}$$
-This differential equation is the same as the one found in <a href="https://arnostrouwen.github.io/websiteplayground/posts/adjoint-sensitivity/">part 1</a>.
+This differential equation is the same as the one found in <a href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-1/posts/adjoint-sensitivity/">part 1</a>.
 It is a good exercise to try the same technique on \(\frac{\partial G(c_{[0,t]},u(t),p)}{\partial p}\).</p>
       </div>
     </section>
@@ -614,13 +614,13 @@ It is a good exercise to try the same technique on \(\frac{\partial G(c_{[0,t]},
         alt="Arno Strouwen"
         loading="lazy" decoding="async"
         
-          src="/websiteplayground/pfp_hu11514358177083965780.png"
-          srcset="/websiteplayground/pfp_hu9685436059327259938.png 330w,/websiteplayground/pfp_hu11514358177083965780.png 660w
+          src="/websiteplayground/pr-preview/pr-1/pfp_hu11514358177083965780.png"
+          srcset="/websiteplayground/pr-preview/pr-1/pfp_hu9685436059327259938.png 330w,/websiteplayground/pr-preview/pr-1/pfp_hu11514358177083965780.png 660w
           
-            ,/websiteplayground/pfp.png 800w
+            ,/websiteplayground/pr-preview/pr-1/pfp.png 800w
           
           
-            ,/websiteplayground/pfp.png 800w
+            ,/websiteplayground/pr-preview/pr-1/pfp.png 800w
           "
           sizes="100vw"
         
@@ -702,7 +702,7 @@ It is a good exercise to try the same technique on \(\frac{\partial G(c_{[0,t]},
       <div class="flex justify-between pt-3">
         <span>
           
-            <a class="group flex" href="/websiteplayground/posts/adjoint-sensitivity/">
+            <a class="group flex" href="/websiteplayground/pr-preview/pr-1/posts/adjoint-sensitivity/">
               <span
                 class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
                 ><span class="ltr:inline rtl:hidden">&larr;</span
@@ -724,7 +724,7 @@ It is a good exercise to try the same technique on \(\frac{\partial G(c_{[0,t]},
         </span>
         <span>
           
-            <a class="group flex text-right" href="/websiteplayground/posts/soptimal/">
+            <a class="group flex text-right" href="/websiteplayground/pr-preview/pr-1/posts/soptimal/">
               <span class="flex flex-col">
                 <span
                   class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
@@ -822,7 +822,7 @@ It is a good exercise to try the same technique on \(\frac{\partial G(c_{[0,t]},
 <div
   id="search-wrapper"
   class="invisible fixed inset-0 z-50 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm sm:p-6 md:p-[10vh] lg:p-[12vh] dark:bg-neutral-900/50"
-  data-url="https://arnostrouwen.github.io/websiteplayground/"
+  data-url="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-1/"
 >
   <div
     id="search-modal"
