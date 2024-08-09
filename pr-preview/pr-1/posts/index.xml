@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Strouwen Statistics</title>
+    <link>https://arnostrouwen.github.io/websiteplayground/posts/</link>
+    <description>Recent content on Strouwen Statistics</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://arnostrouwen.github.io/websiteplayground/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design for model discrimination using symbolic regression</title>
+      <link>https://arnostrouwen.github.io/websiteplayground/posts/soptimal/</link>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/websiteplayground/posts/soptimal/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;Most experimental design focusses on parameter precision,&#xA;where the model structure is assumed known and fixed.&#xA;But arguably finding the correct model structure&#xA;is the part of the modelling process that takes the most effort.&#xA;In this blog we will look at automating this process using symbolic regression,&#xA;and to do this with gathering too much data.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Notes on adjoint sensitivity analysis of dynamic systems part 2</title>
+      <link>https://arnostrouwen.github.io/websiteplayground/posts/adjoint-sensitivity2/</link>
+      <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/websiteplayground/posts/adjoint-sensitivity2/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;We continue from &lt;a href=&#34;https://arnostrouwen.github.io/websiteplayground/posts/adjoint-sensitivity/&#34;&gt;part 1&lt;/a&gt; with a more rigorous version of the derivation of adjoint sensitivity analysis for continuous time systems,&#xA;$$\begin{align*}&#xA;u(0) &amp;amp;= f_0(p)\\&#xA;u(t) &amp;amp;= u(0) + \int_0^{t} f(u(q),p,q)dq\\&#xA;c(t) &amp;amp;= g(u(t),p,t)\\&#xA;G(c) &amp;amp;= \int_0^{t_e } c(s)ds,&#xA;\end{align*}$$&#xA;\(u(t)\) is the dynamic state, which evolution in time is described by the function \(f\).&#xA;\(c(t)\) is the cost at time \(t\) described by the function \(g\) and \(G\) is the total accumulated cost.&#xA;Both \(g\) and \(f\) are dependent on the parameters \(p\) and the time \(t\). We want to calculate the effect \(p\) has on \(G\) using backpropagation.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Notes on adjoint sensitivity analysis of dynamic systems part 1</title>
+      <link>https://arnostrouwen.github.io/websiteplayground/posts/adjoint-sensitivity/</link>
+      <pubDate>Mon, 31 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/websiteplayground/posts/adjoint-sensitivity/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;Gradients are useful for efficient parameter estimation and optimal control of dynamic systems.&#xA;Calculating these gradients requires sensitivity analysis.&#xA;Sensitivity analysis for dynamic systems comes in two flavors, forward mode and adjoint (reverse).&#xA;For systems with a large number of parameters adjoint sensitivity analysis is often more efficient&#xA;&lt;a href=&#34;https://ieeexplore.ieee.org/abstract/document/9622796&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;[1]&lt;/a&gt;.&#xA;I find that the traditional way of deriving adjoints for ordinary differential equations, such as&#xA;&lt;a href=&#34;https://book.sciml.ai/notes/11-Differentiable_Programming_and_Neural_Differential_Equations/&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;[3]&lt;/a&gt;,&#xA;leaves me with little intuition what these equations represent.&#xA;The goal of this blog post is to gain some intuition about these equations by deriving the adjoint equations in a different way.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dynamic experimental design in 100 lines of Julia code</title>
+      <link>https://arnostrouwen.github.io/websiteplayground/posts/dynamic-experimental-design/</link>
+      <pubDate>Thu, 30 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/websiteplayground/posts/dynamic-experimental-design/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;Optimal experimental design is an area of statistics focused on constructing informative experiments.&#xA;In this tutorial we introduce the necessary tools to construct such informative experiments for dynamic systems using only 100 lines of Julia code.&#xA;We will work with a well-mixed fed-batch bioreactor as an example system. We have quite a bit of domain knowledge how to model the behavior of such a reactor.&#xA;The reactor has three dynamic states: the substrate concentration \(C_s\), the biomass concentration \(C_x\) and the volume of the reactor \(V\).&#xA;The evolution in time of these states is governed by the following differential equations:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

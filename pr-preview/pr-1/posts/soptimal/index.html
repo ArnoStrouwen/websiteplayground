@@ -1,0 +1,1144 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="rgb(255,255,255)" />
+  
+  <title>Design for model discrimination using symbolic regression &middot; Strouwen Statistics</title>
+    <meta name="title" content="Design for model discrimination using symbolic regression &middot; Strouwen Statistics" />
+  
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/websiteplayground/js/appearance.min.74ad8406faea02f3e186ba5126249aaeed9073629e04b05037b903396b188724.js"
+    integrity="sha256-dK2EBvrqAvPhhrpRJiSaru2Qc2KeBLBQN7kDOWsYhyQ="
+  ></script>
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/websiteplayground/css/main.bundle.min.b75f42befaf0b4e19edd1684d335ffd171d23211f6c4aca644a79d44a9acaf1e.css"
+    integrity="sha256-t19CvvrwtOGe3RaE0zX/0XHSMhH2xKymRKedRKmsrx4="
+  />
+  
+    
+    
+    
+  
+  
+  
+    
+    
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="/websiteplayground/js/main.bundle.min.af5d9722112bedac95702865c340bcd6286c4e9b2c15ce26b531ea1fba974cb8.js"
+      integrity="sha256-r12XIhEr7ayVcChlw0C81ihsTpssFc4mtTHqH7qXTLg="
+      data-copy="Copy"
+      data-copied="Copied"
+    ></script>
+  
+  
+  <meta
+    name="description"
+    content="
+      
+        
+
+Most experimental design focusses on parameter precision,
+where the model structure is assumed known and fixed.
+But arguably finding the correct model structure
+is the part of the modelling process that takes the most effort.
+In this blog we will look at automating this process using symbolic regression,
+and to do this with gathering too much data.
+      
+    "
+  />
+  
+  
+  
+  <link rel="canonical" href="https://arnostrouwen.github.io/websiteplayground/posts/soptimal/" />
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/websiteplayground/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/websiteplayground/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/websiteplayground/favicon-16x16.png" />
+    <link rel="manifest" href="/websiteplayground/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="https://arnostrouwen.github.io/websiteplayground/posts/soptimal/">
+  <meta property="og:site_name" content="Strouwen Statistics">
+  <meta property="og:title" content="Design for model discrimination using symbolic regression">
+  <meta property="og:description" content=" Most experimental design focusses on parameter precision, where the model structure is assumed known and fixed. But arguably finding the correct model structure is the part of the modelling process that takes the most effort. In this blog we will look at automating this process using symbolic regression, and to do this with gathering too much data.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-01-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-01-01T00:00:00+00:00">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Design for model discrimination using symbolic regression">
+  <meta name="twitter:description" content=" Most experimental design focusses on parameter precision, where the model structure is assumed known and fixed. But arguably finding the correct model structure is the part of the modelling process that takes the most effort. In this blog we will look at automating this process using symbolic regression, and to do this with gathering too much data.">
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "",
+    "name": "Design for model discrimination using symbolic regression",
+    "headline": "Design for model discrimination using symbolic regression",
+    
+    "abstract": "\u003cp\u003e\n\nMost experimental design focusses on parameter precision,\nwhere the model structure is assumed known and fixed.\nBut arguably finding the correct model structure\nis the part of the modelling process that takes the most effort.\nIn this blog we will look at automating this process using symbolic regression,\nand to do this with gathering too much data.\u003c\/p\u003e",
+    "inLanguage": "en",
+    "url" : "https:\/\/arnostrouwen.github.io\/websiteplayground\/posts\/soptimal\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Arno Strouwen"
+    },
+    "copyrightYear": "2023",
+    "dateCreated": "2023-01-01T00:00:00\u002b00:00",
+    "datePublished": "2023-01-01T00:00:00\u002b00:00",
+    
+    "dateModified": "2023-01-01T00:00:00\u002b00:00",
+    
+    
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1305"
+  }
+  </script>
+
+
+  
+  <meta name="author" content="Arno Strouwen" />
+  
+    
+      <link href="https://github.com/ArnoStrouwen" rel="me" />
+    
+      <link href="https://www.linkedin.com/in/arno-strouwen/" rel="me" />
+    
+      <link href="contact@arnostrouwen.com" rel="me" />
+    
+  
+  
+  
+
+
+
+
+
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/websiteplayground/lib/katex/katex.min.af6f85907cdfd6ed3e4906d93a8233d91c5638859f744cd1b98c9b1a3ccaab5f231bdcda49f132f6cdfe8cca86ff33ed468affab8a9a502610a664a34f0f0cfa.css"
+    integrity="sha512-r2&#43;FkHzf1u0&#43;SQbZOoIz2RxWOIWfdEzRuYybGjzKq18jG9zaSfEy9s3&#43;jMqG/zPtRor/q4qaUCYQpmSjTw8M&#43;g=="
+  />
+  
+  
+  <script
+    defer
+    src="/websiteplayground/lib/katex/katex.min.20da6cf7343619410c0900fbc626506c65159ea9f312f9729d5cba7aa713707378f9a4222e8f7fb9a42a7240e9749f199b7334401b3e3e4b60e29cf490492552.js"
+    integrity="sha512-INps9zQ2GUEMCQD7xiZQbGUVnqnzEvlynVy6eqcTcHN4&#43;aQiLo9/uaQqckDpdJ8Zm3M0QBs&#43;Pktg4pz0kEklUg=="
+  ></script>
+  
+  
+  <script
+    defer
+    src="/websiteplayground/lib/katex/auto-render.min.6095714e3aadb63b14ddc4af69346ab12974c1b460654345f8d1860a0b68fcc51b22f68b757433193090bb80afc8965b65cb607e5541d0f5f0f4b2e64d69b9ff.js"
+    integrity="sha512-YJVxTjqttjsU3cSvaTRqsSl0wbRgZUNF&#43;NGGCgto/MUbIvaLdXQzGTCQu4CvyJZbZctgflVB0PXw9LLmTWm5/w=="
+    onload="renderMathInElement(document.body);"
+  ></script>
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+  
+  
+  
+  
+  
+
+
+
+
+  
+  
+</head>
+<body
+    class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 sm:px-14 md:px-24 lg:px-32 dark:bg-neutral-800 dark:text-neutral"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span
+        >Skip to main content</a
+      >
+    </div>
+    
+    
+      <header class="py-6 font-semibold text-neutral-900 print:hidden sm:py-10 dark:text-neutral">
+  <nav class="flex items-start justify-between sm:items-center">
+    
+    <div class="flex flex-row items-center">
+      
+  <a
+    class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+    rel="me"
+    href="/websiteplayground/"
+    >Strouwen Statistics</a
+  >
+
+    </div>
+    
+    
+      <ul class="flex list-none flex-col text-end sm:flex-row">
+        
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/websiteplayground/posts/"
+                  title=""
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Blog</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/websiteplayground/ssi/"
+                  title=""
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Small Sample Inference</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/websiteplayground/about/"
+                  title=""
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >About Me</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/websiteplayground/cv.pdf"
+                  title=""
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >CV</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                
+                
+                  <button
+                    id="search-button-1"
+                    title="Search (/)"
+                  >
+                    
+                      <span
+                        class="group-dark:hover:text-primary-400 transition-colors group-hover:text-primary-600"
+                      ><span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span></span><span
+                        class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                        ></span
+                      >
+                    
+                  </button>
+                
+              
+            </li>
+          
+          
+        
+      </ul>
+    
+  </nav>
+</header>
+
+    
+    <div class="relative flex grow flex-col">
+      <main id="main-content" class="grow">
+        
+  <article>
+    <header class="max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Design for model discrimination using symbolic regression
+      </h1>
+      
+        <div class="mb-12 mt-8 text-base text-neutral-500 print:hidden dark:text-neutral-400">
+          
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2023-01-01 00:00:00 &#43;0000 UTC">1 January 2023</time>
+    
+
+    
+    
+  </div>
+
+  
+  
+
+
+        </div>
+      
+      
+    </header>
+    <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
+      
+      <div class="min-h-0 min-w-0 max-w-prose grow">
+        <p>
+
+Most experimental design focusses on parameter precision,
+where the model structure is assumed known and fixed.
+But arguably finding the correct model structure
+is the part of the modelling process that takes the most effort.
+In this blog we will look at automating this process using symbolic regression,
+and to do this with gathering too much data.</p>
+<p>The Julia packages that we will use:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">using</span> <span class="n">SymbolicRegression</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Symbolics</span><span class="p">,</span> <span class="n">SymbolicUtils</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Distributions</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Optimization</span><span class="p">,</span> <span class="n">OptimizationBBO</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Plots</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="n">Random</span><span class="p">;</span> <span class="n">Random</span><span class="o">.</span><span class="n">seed!</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+</span></span></code></pre></div><p>We will try to discover the equation:
+$$y(x) = \exp(-x)\sin(2\pi x) + \cos(\frac{\pi}{2}x), \qquad 0 \leq x \leq 10,$$
+automatically from data.
+Translated into Julia code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">y</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="nb">π</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="nb">π</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>1.0
+</code></pre><p>As a baseline design let us gather 10 points randomly from the design space.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">n_obs</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">design_region</span> <span class="o">=</span> <span class="n">Uniform</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">10.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">design_region</span><span class="p">,</span><span class="n">n_obs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot</span><span class="p">(</span><span class="mf">0.0</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mf">10.0</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="p">(</span><span class="mf">0.0</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mf">10.0</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;true model&#34;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="ss">:dash</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">scatter!</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;data&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s">&#34;x&#34;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s">&#34;y&#34;</span><span class="p">,</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.8</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">tickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">guidefontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</span></span></code></pre></div>
+  
+  
+  
+  
+  
+
+  
+  
+    
+    
+  
+  <figure>
+    <img src="../figsopt/Soptimal_4_1.png" alt="" class=""/>
+    
+  </figure>
+
+
+<p>Now let us perform <a href="https://en.wikipedia.org/wiki/Symbolic_regression" target="_blank" rel="noreferrer">symbolic regression</a>
+on this dataset. We will look for 10 model structures that fit the data.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">options</span> <span class="o">=</span> <span class="n">SymbolicRegression</span><span class="o">.</span><span class="n">Options</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unary_operators</span> <span class="o">=</span> <span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binary_operators</span><span class="o">=</span><span class="p">(</span><span class="o">+</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="o">/</span><span class="p">,</span> <span class="o">-</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">deterministic</span><span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">hall_of_fame</span> <span class="o">=</span> <span class="n">EquationSearch</span><span class="p">(</span><span class="n">X</span><span class="o">&#39;</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">niterations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">runtests</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">parallelism</span><span class="o">=</span><span class="ss">:serial</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">n_best_max</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="c">#incase &lt; 10 model structures were returned</span>
+</span></span><span class="line"><span class="cl"><span class="n">n_best</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">hall_of_fame</span><span class="o">.</span><span class="n">members</span><span class="p">),</span><span class="n">n_best_max</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">best_models</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="n">hall_of_fame</span><span class="o">.</span><span class="n">members</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="n">member</span><span class="o">-&gt;</span><span class="n">member</span><span class="o">.</span><span class="n">loss</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="n">n_best</span><span class="p">]</span>
+</span></span></code></pre></div><pre tabindex="0"><code>Started!
+10-element Vector{SymbolicRegression.PopMemberModule.PopMember{Float64}}:
+ SymbolicRegression.PopMemberModule.PopMember{Float64}((cos(x1 * -1.5707472
+736173678) - sin(sin(exp(x1) / cos(sin((x1 * 0.11489592239489567) + 0.02924
+150694094207))) / exp(x1))), 0.06403884841950626, 1.0187179197773552e-5, 24
+01441, 5807529618927081144, 5795836981119531379)
+ SymbolicRegression.PopMemberModule.PopMember{Float64}((cos(x1 * -1.5707472
+736173678) - (sin(exp(x1) / cos(sin((x1 * 0.11489592239489567) + 0.02924150
+694094207))) / exp(x1))), 0.06083908652153372, 1.0249160815942009e-5, 20897
+28, 4358865566510575018, 1198926568467179219)
+ SymbolicRegression.PopMemberModule.PopMember{Float64}((cos(x1 / 0.63660506
+56890262) - sin(sin(exp(x1) / cos(sin(0.11489592239489567) * x1)) / exp(x1)
+)), 0.057681573488650405, 2.1388759091569173e-5, 1738646, 35215362873834417
+13, 1106443898740131553)
+ SymbolicRegression.PopMemberModule.PopMember{Float64}((cos(x1 / 0.63660506
+56890262) - sin(sin(exp(x1) / cos(0.11489592239489567 * x1)) / exp(x1))), 0
+.054481940153208334, 2.148542646434505e-5, 1683449, 1106443898740131553, 44
+63609806790343470)
+ SymbolicRegression.PopMemberModule.PopMember{Float64}((cos(x1 / 0.63660506
+56890262) - (sin(exp(x1) / cos(0.11489592239489567 * x1)) / exp(x1))), 0.05
+1288010332056364, 2.3076573687286177e-5, 1458762, 4463609806790343470, 2723
+675212815722575)
+ SymbolicRegression.PopMemberModule.PopMember{Float64}((cos(x1 / 0.63660506
+56890262) - (sin(exp(x1) * 1.0363388900284802) / (exp(x1) - 0.1934422901771
+7546))), 0.04817556182698313, 4.603205300197051e-5, 2412019, 50722280559235
+5699, 4112726823019557294)
+ SymbolicRegression.PopMemberModule.PopMember{Float64}((cos(x1 / 0.63660506
+56890262) - (sin(exp(x1) * 1.0363388900284802) / exp(x1))), 0.0419268037121
+5973, 8.568762695441023e-5, 1359344, 682475129147039269, 320765785728912140
+4)
+ SymbolicRegression.PopMemberModule.PopMember{Float64}((cos(x1 / 0.63660506
+56890262) - (sin(exp(x1) / cos(0.28864399612143354)) / exp(x1))), 0.0451293
+8764414751, 8.636558026583333e-5, 2581722, 6623397325472061777, 38276093791
+68211583)
+ SymbolicRegression.PopMemberModule.PopMember{Float64}((cos(x1 * -1.5707472
+736173678) - (sin(sin(exp(x1))) / exp(x1))), 0.03946124078956312, 0.0002782
+5693509305236, 1189722, 6591081748771200099, 1673930060287288728)
+ SymbolicRegression.PopMemberModule.PopMember{Float64}((cos(x1 * -1.5707472
+736173678) - (sin(exp(x1)) / exp(x1))), 0.036415945717573416, 0.00031881998
+770847704, 1123566, 4441784085260582951, 8874312346525345533)
+</code></pre><hr>
+<p><strong>TECHNICAL NOTE:</strong>
+I ordered the model structures purely by mean squared error loss of the fits.
+Symbolic regression usually also incorporates a punishment for complexity of the model.
+I did not yet find a good way to incorporate this in the experimental design workflow,
+but this is definitely something that should be looked at.</p>
+<hr>
+<p>Now let us turn these symbolic expressions back into executable functions.
+Let us try it for the first suggested model structure:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="nd">@syms</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="n">eqn</span> <span class="o">=</span> <span class="n">node_to_symbolic</span><span class="p">(</span><span class="n">best_models</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tree</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span><span class="n">varMap</span><span class="o">=</span><span class="p">[</span><span class="s">&#34;x&#34;</span><span class="p">])</span>
+</span></span></code></pre></div><pre tabindex="0"><code>cos(-1.5707472736173678(x^1)) - sin(sin(exp(x) / cos(sin(0.0292415069409420
+7 + 0.11489592239489567x))) / exp(x))
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">using</span> <span class="n">SymbolicUtils</span><span class="o">.</span><span class="n">Code</span>
+</span></span><span class="line"><span class="cl"><span class="n">func</span> <span class="o">=</span> <span class="n">Func</span><span class="p">([</span><span class="n">x</span><span class="p">],[],</span><span class="n">eqn</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">expr</span> <span class="o">=</span> <span class="n">toexpr</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">_f</span> <span class="o">=</span> <span class="n">build_function</span><span class="p">(</span><span class="n">eqn</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>:(function (x,)
+      #= C:\Users\arno\.julia\packages\SymbolicUtils\qulQp\src\code.jl:349 
+=#
+      #= C:\Users\arno\.julia\packages\SymbolicUtils\qulQp\src\code.jl:350 
+=#
+      #= C:\Users\arno\.julia\packages\SymbolicUtils\qulQp\src\code.jl:351 
+=#
+      (-)((cos)((*)(-1.5707472736173678, (^)(x, 1))), (sin)((/)((sin)((/)((
+exp)(x), (cos)((sin)((+)(0.02924150694094207, (*)(0.11489592239489567, x)))
+))), (exp)(x))))
+  end)
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="n">eval</span><span class="p">(</span><span class="n">_f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>10-element Vector{Float64}:
+  0.22766738661929953
+ -0.08666167715710274
+  0.5377339408803581
+ -0.018287438097402808
+ -0.7453936527293958
+ -1.069802392904377
+  0.32276595996282476
+ -0.5786714569337166
+ -0.7262625548623343
+  0.09948952933242539
+</code></pre><p>Now we do it for all the others and plot them:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">plot</span><span class="p">(</span><span class="mf">0.0</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mf">10.0</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="p">(</span><span class="mf">0.0</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mf">10.0</span><span class="p">),</span><span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;true model&#34;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="ss">:dash</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">model_structures</span> <span class="o">=</span> <span class="kt">Function</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">n_best</span>
+</span></span><span class="line"><span class="cl">    <span class="n">eqn</span> <span class="o">=</span> <span class="n">node_to_symbolic</span><span class="p">(</span><span class="n">best_models</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tree</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span><span class="n">varMap</span><span class="o">=</span><span class="p">[</span><span class="s">&#34;x&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fi</span> <span class="o">=</span> <span class="n">eval</span><span class="p">(</span><span class="n">build_function</span><span class="p">(</span><span class="n">eqn</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x_plot</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y_plot</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x_try</span> <span class="k">in</span> <span class="mf">0.0</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mf">10.0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y_try</span> <span class="o">=</span> <span class="n">fi</span><span class="p">(</span><span class="n">x_try</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">append!</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span><span class="n">x_try</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">append!</span><span class="p">(</span><span class="n">y_plot</span><span class="p">,</span><span class="n">y_try</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">catch</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plot!</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;model </span><span class="si">$i</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">push!</span><span class="p">(</span><span class="n">model_structures</span><span class="p">,</span><span class="n">fi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="n">scatter!</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;data&#34;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="ss">:dash</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s">&#34;x&#34;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s">&#34;y&#34;</span><span class="p">,</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.6</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">tickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">guidefontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</span></span></code></pre></div>
+  
+  
+  
+  
+  
+
+  
+  
+    
+    
+  
+  <figure>
+    <img src="../figsopt/Soptimal_9_1.png" alt="" class=""/>
+    
+  </figure>
+
+
+<p>We see that none of the suggested model structures approximate the true model
+well in the area between \(0\) and \(2.5\), while between \(2.5\)and \(10\) the models agree.
+In this case it is thus probably a good idea to gather more data for small \(x\).
+Can we formalize this in mathematical terms?
+We will do this by creating a variant of
+<a href="https://academic.oup.com/biomet/article-abstract/62/2/289/337065" target="_blank" rel="noreferrer">T-optimal designs</a>.
+T-optimal designs are model discrimination designs,
+where design points are sought
+which maximize the distance between a model thought to be correct (T for true)
+and some other plausible alternative model structures.
+Though perhaps it is better to think of the &ldquo;true&rdquo; model
+as a null hypothesis model.
+Design points are chosen such that the alternative models predict
+different values than the &ldquo;true&rdquo; model at these points.
+If the &ldquo;true&rdquo; model is then not correct after all,
+it should be easily discernible from the data.</p>
+<p>In our situation, we do not have a model structure which can
+serve as the &ldquo;true&rdquo; model. We will instead work with all pairwise distances
+between the plausible model structures suggested by symbolic regression.
+Collecting measurements where the model structures differ greatly in predictions,
+will cause atleast some of the model structures to become unlikely,
+causing new model structures to enter the top \(10\).
+We call this S-optimal, with S for Symbolics.
+$$N = \text{number of measurements}$$
+$$M = \text{number of models}$$
+$$f_i = \text{ith model structure}$$
+$$x_k = \text{kth design point}$$</p>
+<h2 id="max_x-frac2mm-1sum_i1nsum_ji1n-max_k1-text-to--msetf_ix_k---f_jx_k2" class="relative group">$$\max_x \frac{2}{M(M-1)}\sum_{i=1}^{N}\sum_{j=i+1}^{N} \max_{k=1 \text{ to } M}\set{(f_i(x_k) - f_j(x_k))^2}$$ </h2><p><strong>TECHNICAL NOTE:</strong>
+The average over the pairwise model comparisons could be replaced with the minimum.
+This would lead to a max-min-max strategy instead of a max-expected-max strategy.
+In my experiments this did not work well
+when two of the suggested model structures are very similar or identical.
+This often occurs because of terms like \(sin(x-x)\) being present in symbolic regression.
+Punishing for complexity might remedy this.</p>
+<hr>
+<p>Now let us apply this criterion to gather $3$ new measurements:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="k">function</span> <span class="n">S_criterion</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">model_structures</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n_structures</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">model_structures</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n_obs</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">length</span><span class="p">(</span><span class="n">model_structures</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># sometimes only a single model structure comes out of the equation search</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n_obs</span><span class="p">,</span><span class="n">n_structures</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n_structures</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">.=</span> <span class="n">model_structures</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="n">squared_differences</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n_structures</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">:</span><span class="n">n_structures</span>
+</span></span><span class="line"><span class="cl">            <span class="n">push!</span><span class="p">(</span><span class="n">squared_differences</span><span class="p">,</span> <span class="n">maximum</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">.-</span> <span class="n">y</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">])</span><span class="o">.^</span><span class="mi">2</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-</span><span class="n">mean</span><span class="p">(</span><span class="n">squared_differences</span><span class="p">)</span> <span class="c"># minus sign to minimize instead of maximize</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> <span class="n">S_objective</span><span class="p">(</span><span class="n">x_new</span><span class="p">,(</span><span class="n">x_old</span><span class="p">,</span><span class="n">model_structures</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">S_criterion</span><span class="p">([</span><span class="n">x_old</span><span class="p">;</span><span class="n">x_new</span><span class="p">],</span><span class="n">model_structures</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="n">n_batch</span> <span class="o">=</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_new_ini</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">design_region</span><span class="p">,</span><span class="n">n_batch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">S_objective</span><span class="p">(</span><span class="n">X_new_ini</span><span class="p">,(</span><span class="n">X</span><span class="p">,</span><span class="n">model_structures</span><span class="p">))</span>
+</span></span></code></pre></div><pre tabindex="0"><code>-0.015370296718503698
+</code></pre><hr>
+<p><strong>TECHNICAL NOTE:</strong>
+Can this be reformulated as a differentiable optimization problem, using slack variables?</p>
+<hr>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">lb</span> <span class="o">=</span> <span class="n">fill</span><span class="p">(</span><span class="n">minimum</span><span class="p">(</span><span class="n">design_region</span><span class="p">),</span><span class="n">n_batch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ub</span> <span class="o">=</span> <span class="n">fill</span><span class="p">(</span><span class="n">maximum</span><span class="p">(</span><span class="n">design_region</span><span class="p">),</span><span class="n">n_batch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">prob</span> <span class="o">=</span> <span class="n">OptimizationProblem</span><span class="p">(</span><span class="n">S_objective</span><span class="p">,</span><span class="n">X_new_ini</span><span class="p">,(</span><span class="n">X</span><span class="p">,</span><span class="n">model_structures</span><span class="p">),</span><span class="n">lb</span> <span class="o">=</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">ub</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_new</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="n">BBO_adaptive_de_rand_1_bin_radiuslimited</span><span class="p">(),</span><span class="n">maxtime</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>u: 3-element Vector{Float64}:
+ 1.867790602985872e-18
+ 0.22833800197426193
+ 3.301026120902155
+</code></pre><p>We see that \(2\) new observations are indeed both smaller than \(2.5\).
+The last one is used to discriminate between two models that are almost indistinguishable with the naked eye.
+Let us plot this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">Y_new</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot</span><span class="p">(</span><span class="mf">0.0</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mf">10.0</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="p">(</span><span class="mf">0.0</span><span class="o">:</span><span class="mf">0.1</span><span class="o">:</span><span class="mf">10.0</span><span class="p">),</span><span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;true model&#34;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="ss">:dash</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">n_best</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x_plot</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y_plot</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x_try</span> <span class="k">in</span> <span class="mf">0.0</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mf">10.0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y_try</span> <span class="o">=</span> <span class="n">model_structures</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">x_try</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">append!</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span><span class="n">x_try</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">append!</span><span class="p">(</span><span class="n">y_plot</span><span class="p">,</span><span class="n">y_try</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">catch</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plot!</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;model </span><span class="si">$i</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="n">scatter!</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;data old&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">scatter!</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span><span class="n">Y_new</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;data new&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s">&#34;x&#34;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s">&#34;y&#34;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.8</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">tickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">guidefontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</span></span></code></pre></div>
+  
+  
+  
+  
+  
+
+  
+  
+    
+    
+  
+  <figure>
+    <img src="../figsopt/Soptimal_12_1.png" alt="" class=""/>
+    
+  </figure>
+
+
+<p>Now, we run symbolic regression on our combined dataset:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-julia" data-lang="julia"><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="p">;</span><span class="n">X_new</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y</span><span class="p">;</span><span class="n">Y_new</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">hall_of_fame</span> <span class="o">=</span> <span class="n">EquationSearch</span><span class="p">(</span><span class="n">X</span><span class="o">&#39;</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">niterations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">runtests</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">parallelism</span><span class="o">=</span><span class="ss">:serial</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">n_best</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">hall_of_fame</span><span class="o">.</span><span class="n">members</span><span class="p">),</span><span class="n">n_best_max</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">best_models</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="n">hall_of_fame</span><span class="o">.</span><span class="n">members</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="n">member</span><span class="o">-&gt;</span><span class="n">member</span><span class="o">.</span><span class="n">loss</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="n">n_best</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot</span><span class="p">(</span><span class="mf">0.0</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mf">10.0</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="p">(</span><span class="mf">0.0</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mf">10.0</span><span class="p">),</span><span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;true model&#34;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="ss">:dash</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">model_structures</span> <span class="o">=</span> <span class="kt">Function</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">n_best</span>
+</span></span><span class="line"><span class="cl">    <span class="n">eqn</span> <span class="o">=</span> <span class="n">node_to_symbolic</span><span class="p">(</span><span class="n">best_models</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tree</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span><span class="n">varMap</span><span class="o">=</span><span class="p">[</span><span class="s">&#34;x&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">eqn</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fi</span> <span class="o">=</span> <span class="n">eval</span><span class="p">(</span><span class="n">build_function</span><span class="p">(</span><span class="n">eqn</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x_plot</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y_plot</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x_try</span> <span class="k">in</span> <span class="mf">0.0</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mf">10.0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span>
+</span></span><span class="line"><span class="cl">            <span class="n">y_try</span> <span class="o">=</span> <span class="n">fi</span><span class="p">(</span><span class="n">x_try</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">append!</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span><span class="n">x_try</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">append!</span><span class="p">(</span><span class="n">y_plot</span><span class="p">,</span><span class="n">y_try</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">catch</span>
+</span></span><span class="line"><span class="cl">        <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plot!</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;model </span><span class="si">$i</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">push!</span><span class="p">(</span><span class="n">model_structures</span><span class="p">,</span><span class="n">fi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="n">scatter!</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">&#34;data&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s">&#34;x&#34;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s">&#34;y&#34;</span><span class="p">,</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.8</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot!</span><span class="p">(</span><span class="n">tickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">guidefontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>Started!
+cos(1.5707963267136822(x^1)) - (sin(-6.283185306231179(x^1)) / exp(x))
+cos(1.5707963267136822(x^1)) - (sin(-6.283185306231179(x^1)) / exp(x))
+cos(1.5707963267136822(x^1)) - (sin((x^1)*((-5.283185306231179 - cos(x - x)
+)^1)) / exp(x))
+cos(1.5707963267136822(x^1)) - (sin((x^1)*((-5.283185306231179 - exp(1.5707
+963267136822((x - x)^1)))^1)) / exp(x))
+cos(1.5707963267136822(x^1)) - (sin((-5.283185306231179(x^1)) - x) / exp(x)
+)
+cos(1.5707963267136822(x^1)) - (sin(((-5.283185306231179 / x)*(x^2)) - x) /
+ exp(x))
+cos(1.5707963267136822(x^1)) - (sin(((sin(x) - 5.283185306231179x) - x) - s
+in(x)) / exp(x))
+cos(1.5707963265959193(x^1)) - (sin(x / -0.15915494382513268) / exp(x))
+cos(1.5707768686144095(x^1)) - (sin(x / -0.1589621029216852) / exp(x))
+cos(1.571732202757438(x^1)) - sin(0.2460674037875204 / (x*x))
+</code></pre>
+  
+  
+  
+  
+  
+
+  
+  
+    
+    
+  
+  <figure>
+    <img src="../figsopt/Soptimal_13_1.png" alt="" class=""/>
+    
+  </figure>
+
+
+<p>Et voilà, we found the correct model structure,
+with only 3 new observations!</p>
+<hr>
+<p><strong>TECHNICAL NOTE:</strong>
+In fact we found it multiple times, with expressions like \(sin(x-x)\).
+Again, punishing for needless complexity would be of added value here.</p>
+<hr>
+      </div>
+    </section>
+    <footer class="max-w-prose pt-8 print:hidden">
+      
+  <div class="flex">
+    
+    
+    
+      
+      
+        
+        
+
+
+
+
+
+
+
+
+  
+    <picture
+      class="!mb-0 !mt-0 me-4 w-24 h-auto rounded-full"
+      
+    >
+      
+      
+      
+      
+      <img
+        width="800"
+        height="800"
+        class="!mb-0 !mt-0 me-4 w-24 h-auto rounded-full"
+        alt="Arno Strouwen"
+        loading="lazy" decoding="async"
+        
+          src="/websiteplayground/pfp_hu11514358177083965780.png"
+          srcset="/websiteplayground/pfp_hu9685436059327259938.png 330w,/websiteplayground/pfp_hu11514358177083965780.png 660w
+          
+            ,/websiteplayground/pfp.png 800w
+          
+          
+            ,/websiteplayground/pfp.png 800w
+          "
+          sizes="100vw"
+        
+      />
+    </picture>
+  
+
+
+      
+    
+    <div class="place-self-center">
+      
+        <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+          Author
+        </div>
+        <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+          Arno Strouwen
+        </div>
+      
+      
+      <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+    
+      
+        <a
+          class="px-1 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+          style="will-change:transform;"
+          href="https://github.com/ArnoStrouwen"
+          target="_blank"
+          aria-label="Github"
+          rel="me noopener noreferrer"
+          ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+          style="will-change:transform;"
+          href="https://www.linkedin.com/in/arno-strouwen/"
+          target="_blank"
+          aria-label="Linkedin"
+          rel="me noopener noreferrer"
+          ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+          style="will-change:transform;"
+          href="contact@arnostrouwen.com"
+          target="_blank"
+          aria-label="Email"
+          rel="me noopener noreferrer"
+          ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z"/></svg>
+</span></a
+        >
+      
+    
+  </div>
+
+</div>
+    </div>
+  </div>
+
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="group flex" href="/websiteplayground/posts/adjoint-sensitivity2/">
+              <span
+                class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&larr;</span
+                ><span class="ltr:hidden rtl:inline">&rarr;</span></span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Notes on adjoint sensitivity analysis of dynamic systems part 2</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2022-04-30 00:00:00 &#43;0000 UTC">30 April 2022</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+        
+          <div class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12">
+            <a
+              href="#the-top"
+              class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+              aria-label="Scroll to top"
+              title="Scroll to top"
+            >
+              &uarr;
+            </a>
+          </div>
+        
+      </main><footer class="py-10 print:hidden">
+  
+  
+  <div class="flex items-center justify-between">
+    <div>
+      
+      
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            &copy;
+            2024
+            Arno Strouwen
+        </p>
+      
+      
+      
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          
+          
+          Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+            href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://github.com/jpanther/congo" target="_blank" rel="noopener noreferrer">Congo</a>
+        </p>
+      
+    </div>
+    <div class="flex flex-row items-center">
+      
+      
+      
+      
+        <div
+          class="me-14 cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        >
+          <button id="appearance-switcher-0" type="button" aria-label="appearance switcher">
+            <div
+              class="flex h-12 w-12 items-center justify-center dark:hidden"
+              title="Switch to dark appearance"
+            >
+              <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+            </div>
+            <div
+              class="hidden h-12 w-12 items-center justify-center dark:flex"
+              title="Switch to light appearance"
+            >
+              <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+            </div>
+          </button>
+        </div>
+      
+    </div>
+  </div>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 z-50 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm sm:p-6 md:p-[10vh] lg:p-[12vh] dark:bg-neutral-900/50"
+  data-url="https://arnostrouwen.github.io/websiteplayground/"
+>
+  <div
+    id="search-modal"
+    class="top-20 mx-auto flex min-h-0 w-full max-w-3xl flex-col rounded-md border border-neutral-200 bg-neutral shadow-lg dark:border-neutral-700 dark:bg-neutral-800"
+  >
+    <header class="relative z-10 flex flex-none items-center justify-between px-2">
+      <form class="flex min-w-0 flex-auto items-center">
+        <div class="flex h-8 w-8 items-center justify-center text-neutral-400">
+          <span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="mx-1 flex h-12 flex-auto appearance-none bg-transparent focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0"
+        />
+      </form>
+      <button
+        id="close-search-button"
+        class="flex h-8 w-8 items-center justify-center text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)"
+      >
+        <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto overflow-auto px-2">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+</html>
