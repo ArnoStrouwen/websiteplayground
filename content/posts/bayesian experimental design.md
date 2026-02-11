@@ -2,7 +2,7 @@
 draft: false
 title: Notes on Bayesian experimental design
 date: 2023-08-01
-lastmod: 2025-01-01
+lastmod: 2026-02-11
 ---
 {{< katex >}}
 For much of the experimental design literature, Bayesian experimental design is synonymous with the
@@ -59,3 +59,8 @@ $$
 p(y|D)  = \int p(y, \theta|D) d\theta.
 $$
 Thus, unfortunately, a nested numerical integration technique will still be required to generate Bayesian optimal designs.
+
+For continuations that add sequential decision-making and the policy interpretation, see
+[adaptive Bayesian experimental design]({{< ref "adaptive bayesian experimental design" >}})
+and
+[policy equivalence in adaptive Bayesian experimental design](/posts/policy-equivalence-in-adaptive-bayesian-experimental-design/).

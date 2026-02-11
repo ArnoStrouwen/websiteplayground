@@ -2,7 +2,7 @@
 draft: false
 title: Notes on adaptive Bayesian experimental design
 date: 2024-02-01
-lastmod: 2026-01-01
+lastmod: 2026-02-11
 ---
 {{< katex >}}
 Continuing from [Bayesian experimental design]({{< ref "bayesian experimental design" >}}),
@@ -86,3 +86,6 @@ However, when observations \\(y\\) are continuous, we cannot use tabular dynamic
 the state space of possible observations is infinite.
 Approximate dynamic programming methods are required to solve these optimization problems in practice,
 which is the focus of much current experimental design literature, e.g. [Deep Adaptive Design](https://arxiv.org/abs/2103.02438).
+
+For a direct continuation that formalizes why this nested criterion is exactly a policy-optimization problem,
+see [policy equivalence in adaptive Bayesian experimental design](/posts/policy-equivalence-in-adaptive-bayesian-experimental-design/).
