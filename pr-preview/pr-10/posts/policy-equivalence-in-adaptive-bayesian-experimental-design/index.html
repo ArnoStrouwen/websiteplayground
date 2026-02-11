@@ -1,0 +1,969 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"
+><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FFFFFF" />
+  
+  <title>Notes on policy equivalence in adaptive Bayesian experimental design &middot; Strouwen Statistics</title>
+    <meta name="title" content="Notes on policy equivalence in adaptive Bayesian experimental design &middot; Strouwen Statistics" />
+  
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js"
+    integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="
+  ></script>
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/css/main.bundle.min.0a40efa574f68fe3647a52c488f20943b400905792daa187828292678c2bbbe7.css"
+    integrity="sha256-CkDvpXT2j&#43;NkelLEiPIJQ7QAkFeS2qGHgoKSZ4wru&#43;c="
+  />
+  
+    
+    
+    
+  
+  
+  
+    
+    
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/js/main.bundle.min.a83fbb8582177ca1299b6eb0170cc50a07758d9720519960ecd42a9a53e43135.js"
+      integrity="sha256-qD&#43;7hYIXfKEpm26wFwzFCgd1jZcgUZlg7NQqmlPkMTU="
+      data-copy="Copy"
+      data-copied="Copied"
+    ></script>
+  
+  
+  <meta
+    name="description"
+    content="
+      
+        
+
+Continuing from Bayesian experimental design and
+adaptive Bayesian experimental design,
+we can make precise why the nested adaptive criterion is equivalent to an optimal policy problem.
+      
+    "
+  />
+  
+  
+  
+  
+    <link rel="canonical" href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/policy-equivalence-in-adaptive-bayesian-experimental-design/" />
+  
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/arnostrouwen.com/pr-preview/pr-10/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/arnostrouwen.com/pr-preview/pr-10/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/arnostrouwen.com/pr-preview/pr-10/favicon-16x16.png" />
+    <link rel="manifest" href="/arnostrouwen.com/pr-preview/pr-10/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/policy-equivalence-in-adaptive-bayesian-experimental-design/">
+  <meta property="og:site_name" content="Strouwen Statistics">
+  <meta property="og:title" content="Notes on policy equivalence in adaptive Bayesian experimental design">
+  <meta property="og:description" content="Continuing from Bayesian experimental design and adaptive Bayesian experimental design, we can make precise why the nested adaptive criterion is equivalent to an optimal policy problem.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-04-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-11T00:00:00+00:00">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Notes on policy equivalence in adaptive Bayesian experimental design">
+  <meta name="twitter:description" content="Continuing from Bayesian experimental design and adaptive Bayesian experimental design, we can make precise why the nested adaptive criterion is equivalent to an optimal policy problem.">
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "",
+    "name": "Notes on policy equivalence in adaptive Bayesian experimental design",
+    "headline": "Notes on policy equivalence in adaptive Bayesian experimental design",
+    
+    "abstract": "\u003cp\u003e\n\nContinuing from \u003ca href=\u0022https:\/\/arnostrouwen.github.io\/arnostrouwen.com\/pr-preview\/pr-10\/posts\/bayesian-experimental-design\/\u0022\u003eBayesian experimental design\u003c\/a\u003e and\n\u003ca href=\u0022https:\/\/arnostrouwen.github.io\/arnostrouwen.com\/pr-preview\/pr-10\/posts\/adaptive-bayesian-experimental-design\/\u0022\u003eadaptive Bayesian experimental design\u003c\/a\u003e,\nwe can make precise why the nested adaptive criterion is equivalent to an optimal policy problem.\u003c\/p\u003e",
+    "inLanguage": "en",
+    "url" : "https:\/\/arnostrouwen.github.io\/arnostrouwen.com\/pr-preview\/pr-10\/posts\/policy-equivalence-in-adaptive-bayesian-experimental-design\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Arno Strouwen"
+    },
+    "copyrightYear": "2024",
+    "dateCreated": "2024-04-01T00:00:00\u002b00:00",
+    "datePublished": "2024-04-01T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-02-11T00:00:00\u002b00:00",
+    
+    
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "558"
+  }
+  </script>
+    
+    <script type="application/ld+json">
+    {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     {
+       "@type": "ListItem",
+       "item": "https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/",
+       "name": "",
+       "position": 1
+     },
+     {
+       "@type": "ListItem",
+       "item": "https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/",
+       "name": "",
+       "position": 2
+     },
+     {
+       "@type": "ListItem",
+       "name": "Notes on Policy Equivalence in Adaptive Bayesian Experimental Design",
+       "position": 3
+     }
+   ]
+ }
+  </script>
+
+  
+  
+    <meta name="author" content="Arno Strouwen" />
+  
+  
+    
+      <link href="https://github.com/ArnoStrouwen" rel="me" />
+    
+      <link href="https://www.linkedin.com/in/arno-strouwen/" rel="me" />
+    
+      <link href="contact@arnostrouwen.com" rel="me" />
+    
+  
+  
+  
+
+
+
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="/arnostrouwen.com/pr-preview/pr-10/lib/katex/katex.min.7e7e35e3ef02b7b437449a44ca3fac62ec1ed39cb8312b680a00fe8ac60badc95b063b694636b8440856f7f5e8c2cc9e6b0efb581179b2656c7e1e97558c7096.css" integrity="sha512-fn414&#43;8Ct7Q3RJpEyj&#43;sYuwe05y4MStoCgD&#43;isYLrclbBjtpRja4RAhW9/Xowsyeaw77WBF5smVsfh6XVYxwlg==" />
+
+
+
+
+<script>
+    (function () {
+        var katexDelimiters = [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ];
+
+        function renderKatex() {
+            if (typeof renderMathInElement === "function") {
+                renderMathInElement(document.body, { delimiters: katexDelimiters });
+            }
+        }
+
+        function loadScript(src, onload) {
+            var script = document.createElement("script");
+            script.src = src;
+            script.onload = onload;
+            document.head.appendChild(script);
+        }
+
+        
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", init);
+        } else {
+            init();
+        }
+
+        function init() {
+            
+            var oldDefine = window.define;
+            window.define = undefined;
+
+            loadScript("\/arnostrouwen.com\/pr-preview\/pr-10\/lib\/katex\/katex.min.cadd45c1af1f44bdaf196dc9b104f1daeb29043f0dc59155ffe22847510a04390a0b7a859400d420a626204f7fc5ddb07c19311de1c66b25e19c2559d3e126a8.js", function () {
+                loadScript("\/arnostrouwen.com\/pr-preview\/pr-10\/lib\/katex\/auto-render.min.e9b2833d28623d18c071d78ef13e9c79d695122d296af3dbcee7bf1bf6518b0565bab59939267fbc8f5faf696193c20f5caef3e7501969cfb306f6738032730d.js", function () {
+                    
+                    window.define = oldDefine;
+                    
+                    renderKatex();
+                });
+            });
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+</head>
+<body
+    class="m-auto flex h-screen max-w-7xl flex-col bg-neutral px-6 text-lg leading-7 text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32"
+  >
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="-translate-y-8 rounded-b-lg bg-primary-200 px-3 py-1 text-sm focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="pe-2 font-bold text-primary-600 dark:text-primary-400">&darr;</span
+        >Skip to main content</a
+      >
+    </div>
+    
+    
+      <header class="py-6 font-semibold text-neutral-900 dark:text-neutral sm:py-10 print:hidden">
+  <nav class="flex items-start justify-between sm:items-center">
+    
+    <div class="flex flex-row items-center">
+      
+  <a
+    class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
+    rel="me"
+    href="/arnostrouwen.com/pr-preview/pr-10/"
+    >Strouwen Statistics</a
+  >
+
+    </div>
+    
+    
+      <ul class="flex list-none flex-col text-end sm:flex-row">
+        
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/arnostrouwen.com/pr-preview/pr-10/posts/"
+                  title=""
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >Blog</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/arnostrouwen.com/pr-preview/pr-10/about/"
+                  title="About me"
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >About Me</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                <a
+                  href="/arnostrouwen.com/pr-preview/pr-10/cv.pdf"
+                  title=""
+                  
+                  ><span
+                      class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                      >CV</span
+                    >
+                  </a
+                >
+              
+            </li>
+          
+            
+            <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
+              
+                
+                
+                  <button
+                    id="search-button-1"
+                    title="Search (/)"
+                  >
+                    
+                      <span
+                        class="group-dark:hover:text-primary-400 transition-colors group-hover:text-primary-600"
+                      ><span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span></span><span
+                        class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
+                        ></span
+                      >
+                    
+                  </button>
+                
+              
+            </li>
+          
+          
+        
+      </ul>
+    
+  </nav>
+</header>
+
+    
+    <div class="relative flex grow flex-col">
+      <main id="main-content" class="grow">
+        
+  <article>
+    <header class="max-w-prose">
+      
+      <h1 class="mb-8 mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Notes on policy equivalence in adaptive Bayesian experimental design
+      </h1>
+      
+        <div class="mb-10 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+          
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2024-04-01 00:00:00 &#43;0000 UTC">1 April 2024</time><span class="px-2 text-primary-500">&middot;</span><time datetime="2026-02-11 00:00:00 &#43;0000 UTC">Updated: 11 February 2026</time>
+    
+
+    
+    
+  </div>
+
+  
+  
+
+
+        </div>
+      
+      
+    </header>
+    <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
+      
+      <div class="min-h-0 min-w-0 max-w-prose grow">
+        <p>
+
+Continuing from <a href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/bayesian-experimental-design/">Bayesian experimental design</a> and
+<a href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adaptive-bayesian-experimental-design/">adaptive Bayesian experimental design</a>,
+we can make precise why the nested adaptive criterion is equivalent to an optimal policy problem.</p>
+<p>Consider 3 sequential design choices \(D_1,D_2,D_3\) and outcomes \(Y_1,Y_2,Y_3\).
+Let
+$$
+u(d_1,d_2,d_3,y_1,y_2,y_3)
+= -S(\theta \mid y_{1:3},d_{1:3}),
+$$
+so maximizing \(u\) is the same as minimizing posterior entropy.</p>
+<p>The adaptive nested objective can be written as
+$$
+V
+=\max_{d_1\in D_1}
+\mathbb E_{Y_1\mid d_1}\Big[
+\max_{d_2\in D_2}
+\mathbb E_{Y_2\mid Y_1,d_1,d_2}\Big[
+\max_{d_3\in D_3}
+\mathbb E_{Y_3\mid Y_1,Y_2,d_1,d_2,d_3}
+\big[u(d_1,d_2,d_3,Y_1,Y_2,Y_3)\big]
+\Big]
+\Big].
+$$</p>
+<p>This is not a myopic rule.
+The stage-1 choice is optimized for expected utility over all future observation paths,
+while explicitly anticipating that stages 2 and 3 will adapt optimally to whatever data are observed.
+Equivalently, we are solving for a <em>policy</em> that maps observations to decisions.</p>
+<p>A deterministic non-anticipative policy is
+$$
+\pi=(\pi_1,\pi_2,\pi_3)
+$$
+with
+$$
+\pi_1\in D_1,\qquad
+\pi_2:D_1\times \mathcal Y_1\to D_2,\qquad
+\pi_3:D_1\times \mathcal Y_1\times D_2\times \mathcal Y_2\to D_3.
+$$</p>
+<p>Given \(\pi\), the policy value is
+$$
+J(\pi)=
+\mathbb E\Big[
+u\big(
+\pi_1,
+\pi_2(\pi_1,Y_1),
+\pi_3(\pi_1,Y_1,\pi_2(\pi_1,Y_1),Y_2),
+Y_1,Y_2,Y_3
+\big)
+\Big].
+$$
+Let \(\Pi\) be the set of admissible policies.
+The key equivalence is
+$$
+V = \max_{\pi\in\Pi} J(\pi).
+$$</p>
+<p>The proof has two parts.</p>
+<p>First, define the continuation values once:
+$$
+G_3(d_1,y_1,d_2,y_2)=
+\max_{a_3\in D_3}
+\mathbb E\big[u(d_1,d_2,a_3,y_1,y_2,Y_3)\mid d_1,y_1,d_2,y_2,a_3\big],
+$$
+$$
+G_2(d_1,y_1)=
+\max_{a_2\in D_2}
+\mathbb E\big[G_3(d_1,y_1,a_2,Y_2)\mid d_1,y_1,a_2\big],
+$$
+$$
+G_1=\max_{a_1\in D_1}\mathbb E\big[G_2(a_1,Y_1)\mid a_1\big].
+$$
+By definition of the nested objective, \(G_1=V\).</p>
+<h3 id="part-1-no-policy-can-score-higher-than-v" class="relative group">Part 1: no policy can score higher than V </h3><p>Fix any policy \(\pi\).
+For each realized history \(h_2=(d_1,y_1,d_2,y_2)\), define the stage-3 value of choosing action \(a_3\) as
+$$
+q_3(a_3;h_2)=\mathbb E\big[u(d_1,d_2,a_3,y_1,y_2,Y_3)\mid h_2,a_3\big].
+$$
+The policy chooses \(a_3=\pi_3(h_2)\), so it gets \(q_3(\pi_3(h_2);h_2)\).
+Since this is one feasible action in \(D_3\),
+$$
+q_3(\pi_3(h_2);h_2)\le \max_{a_3\in D_3}q_3(a_3;h_2)=G_3(d_1,y_1,d_2,y_2).
+$$</p>
+<p>Now move one step earlier. For each \((d_1,y_1)\), define
+$$
+q_2(a_2;d_1,y_1)=\mathbb E\big[G_3(d_1,y_1,a_2,Y_2)\mid y_1,d_1,a_2\big].
+$$
+Again, the policy uses one feasible action \(a_2=\pi_2(d_1,y_1)\), so
+$$
+q_2(\pi_2(d_1,y_1);d_1,y_1)\le \max_{a_2\in D_2}q_2(a_2;d_1,y_1)=G_2(d_1,y_1).
+$$</p>
+<p>At stage 1, define
+$$
+q_1(a_1)=\mathbb E\big[G_2(a_1,Y_1)\mid a_1\big].
+$$
+Because \(\pi_1\) is one feasible action in \(D_1\),
+$$
+q_1(\pi_1)\le \max_{a_1\in D_1}q_1(a_1)=G_1,
+$$
+and from the definitions above, \(G_1=V\).</p>
+<p>Putting these stage-wise inequalities together gives \(J(\pi)\le V\).
+Since \(\pi\) was arbitrary,
+$$
+\max_{\pi\in\Pi}J(\pi)\le V.
+$$</p>
+<h3 id="part-2-there-exists-a-policy-with-value-exactly-v" class="relative group">Part 2: there exists a policy with value exactly V </h3><p>Using those same continuation-value definitions, construct \(\pi^\star\) by choosing argmax actions at every history.
+Then \(\pi^\star\) makes exactly the same choices as the nested objective definition of \(V\).
+Evaluating \(J(\pi^\star)\) and applying iterated expectation from stage 3 back to stage 1 yields
+$$
+J(\pi^\star)=G_1=V,
+$$
+so
+$$
+V\le \max_{\pi\in\Pi}J(\pi).
+$$</p>
+<p>Combining the two parts yields
+$$
+V=\max_{\pi\in\Pi}J(\pi).
+$$</p>
+<p>For Bayesian experimental design this matters because it clarifies what is computed offline and online.
+The optimization is over decision rules, not over a single static sequence.
+Once an approximate optimal policy is available, online adaptation is cheap:
+new measurements are plugged into \(\pi_2\) and \(\pi_3\) without re-solving the full nested problem.</p>
+<p>In practice, for continuous observations \(Y\), tabular dynamic programming is not available.
+A common approximation is to parameterize the policy with neural networks,
+for example \(d_2=\pi_{\phi,2}(d_1,y_1)\) and \(d_3=\pi_{\phi,3}(d_1,y_1,d_2,y_2)\),
+where \(\phi\) are network weights.
+Conceptually, the exact problem is optimization in function space (choose the best measurable mapping from histories to actions).
+After parameterization, that infinite-dimensional search is replaced by finite-dimensional nonlinear programming over \(\phi\).
+Then we simulate trajectories from the Bayesian model, estimate \(J(\pi_\phi)\) by Monte Carlo,
+and optimize \(\phi\) with policy gradient methods.</p>
+      </div>
+    </section>
+    <footer class="max-w-prose pt-8 print:hidden">
+      
+  <div class="flex">
+    
+    
+    
+      
+      
+        
+        
+
+
+
+
+
+
+
+
+  
+    <picture
+      class="!mb-0 !mt-0 me-4 w-24 h-auto rounded-full"
+      
+    >
+      
+      
+      
+      
+      <img
+        width="800"
+        height="800"
+        class="!mb-0 !mt-0 me-4 w-24 h-auto rounded-full"
+        alt="Arno Strouwen"
+        loading="lazy" decoding="async"
+        
+          src="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/pfp_hu_32ed8f0f2c8c45db.png" srcset="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/pfp_hu_31954227e4a23f7d.png 330w,https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/pfp_hu_32ed8f0f2c8c45db.png 660w
+          
+            ,https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/pfp.png 800w
+          
+          
+            ,https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/pfp.png 800w
+          "
+          sizes="100vw"
+        
+      />
+    </picture>
+  
+
+
+      
+    
+    <div class="place-self-center">
+      
+        <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+          Author
+        </div>
+        <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+          Arno Strouwen
+        </div>
+      
+      
+      <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+    
+      
+        <a
+          class="px-1 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+          style="will-change:transform;"
+          href="https://github.com/ArnoStrouwen"
+          target="_blank"
+          aria-label="Github"
+          rel="me noopener noreferrer"
+          ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+          style="will-change:transform;"
+          href="https://www.linkedin.com/in/arno-strouwen/"
+          target="_blank"
+          aria-label="Linkedin"
+          rel="me noopener noreferrer"
+          ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 transition-transform hover:scale-125 hover:text-primary-700 dark:hover:text-primary-400"
+          style="will-change:transform;"
+          href="contact@arnostrouwen.com"
+          target="_blank"
+          aria-label="Email"
+          rel="me noopener noreferrer"
+          ><span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z"/></svg>
+</span></a
+        >
+      
+    
+  </div>
+
+</div>
+    </div>
+  </div>
+
+
+      
+
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="group flex" href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adaptive-bayesian-experimental-design/">
+              <span
+                class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&larr;</span
+                ><span class="ltr:hidden rtl:inline">&rarr;</span></span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Notes on adaptive Bayesian experimental design</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2024-02-01 00:00:00 &#43;0000 UTC">1 February 2024</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="group flex text-right" href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/mmss/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >MixedModelsSmallSample.jl: Small Sample Inference for Mixed Models in Julia</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2025-07-18 00:00:00 &#43;0000 UTC">18 July 2025</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ms-2 text-neutral-700 transition-transform group-hover:-translate-x-[-2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
+                ><span class="ltr:inline rtl:hidden">&rarr;</span
+                ><span class="ltr:hidden rtl:inline">&larr;</span></span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+      </main>
+      
+        <div
+          class="pointer-events-none absolute bottom-0 end-0 top-[100vh] w-12"
+          id="to-top"
+          hidden="true"
+        >
+          <a
+            href="#the-top"
+            class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            &uarr;
+          </a>
+        </div>
+      <footer class="py-10 print:hidden">
+  
+  
+  <div class="flex items-center justify-between">
+    <div>
+      
+      
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            &copy;
+            2026
+            Arno Strouwen
+        </p>
+      
+      
+      
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          
+          
+          Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+            href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://github.com/jpanther/congo" target="_blank" rel="noopener noreferrer">Congo</a>
+        </p>
+      
+    </div>
+    <div class="flex flex-row items-center">
+      
+      
+      
+      
+        <div
+          class="me-14 cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        >
+          <button id="appearance-switcher-0" type="button" aria-label="appearance switcher">
+            <div
+              class="flex h-12 w-12 items-center justify-center dark:hidden"
+              title="Switch to dark appearance"
+            >
+              <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+            </div>
+            <div
+              class="hidden h-12 w-12 items-center justify-center dark:flex"
+              title="Switch to light appearance"
+            >
+              <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+            </div>
+          </button>
+        </div>
+      
+    </div>
+  </div>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 z-50 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
+  data-url="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/"
+>
+  <div
+    id="search-modal"
+    class="top-20 mx-auto flex min-h-0 w-full max-w-3xl flex-col rounded-md border border-neutral-200 bg-neutral shadow-lg dark:border-neutral-700 dark:bg-neutral-800"
+  >
+    <header class="relative z-10 flex flex-none items-center justify-between px-2">
+      <form class="flex min-w-0 flex-auto items-center">
+        <div class="flex h-8 w-8 items-center justify-center text-neutral-400">
+          <span class="icon relative inline-block px-1 align-text-bottom"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="mx-1 flex h-12 flex-auto appearance-none bg-transparent focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0"
+        />
+      </form>
+      <button
+        id="close-search-button"
+        class="flex h-8 w-8 items-center justify-center text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)"
+      >
+        <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto overflow-auto px-2">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+</html>

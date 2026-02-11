@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Strouwen Statistics</title>
+    <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/</link>
+    <description>Recent content on Strouwen Statistics</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 11 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>New Conference Paper: Experimental Design for Missing Physics</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/experimental-design-for-missing-physics/</link>
+      <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/experimental-design-for-missing-physics/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m excited to announce that Sebastian Micluța-Câmpeanu and I have published &lt;a href=&#34;https://www.sciencedirect.com/science/article/pii/S240589632500552X&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;&lt;strong&gt;&amp;ldquo;Experimental Design for Missing Physics&amp;rdquo;&lt;/strong&gt;&lt;/a&gt; at DYCOPS 2025.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MixedModelsSmallSample.jl: Small Sample Inference for Mixed Models in Julia</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/mmss/</link>
+      <pubDate>Fri, 18 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/mmss/</guid>
+      <description>&lt;p&gt;Announcing the registration of &lt;a href=&#34;https://github.com/ArnoStrouwen/MixedModelsSmallSample.jl&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;MixedModelsSmallSample.jl&lt;/a&gt; in the Julia General Registry!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Notes on policy equivalence in adaptive Bayesian experimental design</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/policy-equivalence-in-adaptive-bayesian-experimental-design/</link>
+      <pubDate>Mon, 01 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/policy-equivalence-in-adaptive-bayesian-experimental-design/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;Continuing from &lt;a href=&#34;https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/bayesian-experimental-design/&#34;&gt;Bayesian experimental design&lt;/a&gt; and&#xA;&lt;a href=&#34;https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adaptive-bayesian-experimental-design/&#34;&gt;adaptive Bayesian experimental design&lt;/a&gt;,&#xA;we can make precise why the nested adaptive criterion is equivalent to an optimal policy problem.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Notes on adaptive Bayesian experimental design</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adaptive-bayesian-experimental-design/</link>
+      <pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adaptive-bayesian-experimental-design/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;Continuing from &lt;a href=&#34;https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/bayesian-experimental-design/&#34;&gt;Bayesian experimental design&lt;/a&gt;,&#xA;we  now consider adaptivity.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Notes on Bayesian experimental design</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/bayesian-experimental-design/</link>
+      <pubDate>Tue, 01 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/bayesian-experimental-design/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;For much of the experimental design literature, Bayesian experimental design is synonymous with the&#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/Bayesian_experimental_design#Gain_in_Shannon_information_as_utility&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;expected Kullback-Leibler divergence&lt;/a&gt;.&#xA;It is not obvious at first glance why this criterion leads to informative experiments,&#xA;so let&amp;rsquo;s dive a bit deeper into Bayesian experimental design.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>New paper about Experimental Design using the Kalman Filter</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adaptive-robust-experimental-design/</link>
+      <pubDate>Fri, 31 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adaptive-robust-experimental-design/</guid>
+      <description>&lt;p&gt;I am happy to announce the publication of our paper &amp;ldquo;Adaptive and robust experimental design for linear dynamical models using Kalman filter&amp;rdquo; in &lt;em&gt;Statistical Papers&lt;/em&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Current experimental design techniques for dynamical systems often only incorporate measurement noise, while dynamical systems also involve process noise.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Design for model discrimination using symbolic regression</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/soptimal/</link>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/soptimal/</guid>
+      <description>&lt;p&gt;Most experimental design focusses on parameter precision,&#xA;where the model structure is assumed known and fixed.&#xA;But arguably finding the correct model structure&#xA;is the part of the modelling process that takes the most effort.&#xA;In this blog we will look at automating this process using symbolic regression,&#xA;and to do this with gathering too much data.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Notes on Probabilistic Programming for Stochastic Differential Equations</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/pplsde/</link>
+      <pubDate>Mon, 01 Aug 2022 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/pplsde/</guid>
+      <description>&lt;script src=&#34;https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js&#34; integrity=&#34;sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;&#xD;&#xA;&lt;script src=&#34;https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js&#34; integrity=&#34;sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==&#34; crossorigin=&#34;anonymous&#34; data-relocate-top=&#34;true&#34;&gt;&lt;/script&gt;&#xD;&#xA;&lt;script type=&#34;application/javascript&#34;&gt;define(&#39;jquery&#39;, [],function() {return window.jQuery;})&lt;/script&gt;&#xD;&#xA;&lt;p&gt;Some notes on Bayesian inference for stochastic differential equations in Julia.&#xA;Specifically, inference for θ and σ of the&#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/Ornstein%E2%80%93Uhlenbeck_process&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;Ornstein&amp;ndash;Uhlenbeck process&lt;/a&gt;.&#xA;The explanation is quite terse, since in the end, I was not unable to get this to work on larger problems.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Notes on adjoint sensitivity analysis of dynamic systems part 2</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adjoint-sensitivity2/</link>
+      <pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adjoint-sensitivity2/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;We continue from &lt;a href=&#34;https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adjoint-sensitivity/&#34;&gt;part 1&lt;/a&gt; with a more rigorous version of the derivation of adjoint sensitivity analysis for continuous time systems,&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Notes on adjoint sensitivity analysis of dynamic systems part 1</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adjoint-sensitivity/</link>
+      <pubDate>Mon, 31 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/adjoint-sensitivity/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;Gradients are useful for efficient parameter estimation and optimal control of dynamic systems.&#xA;Calculating these gradients requires sensitivity analysis.&#xA;Sensitivity analysis for dynamic systems comes in two flavors, forward mode and adjoint (reverse).&#xA;For systems with a large number of parameters adjoint sensitivity analysis is often more efficient&#xA;&lt;a href=&#34;https://ieeexplore.ieee.org/abstract/document/9622796&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;[1]&lt;/a&gt;.&#xA;I find that the traditional way of deriving adjoints for ordinary differential equations, such as&#xA;&lt;a href=&#34;https://book.sciml.ai/notes/11-Differentiable_Programming_and_Neural_Differential_Equations/&#34; target=&#34;_blank&#34; rel=&#34;noreferrer&#34;&gt;[3]&lt;/a&gt;,&#xA;leaves me with little intuition what these equations represent.&#xA;The goal of this blog post is to gain some intuition about these equations by deriving the adjoint equations in a different way.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dynamic experimental design in 100 lines of Julia code</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/dynamic-experimental-design/</link>
+      <pubDate>Thu, 30 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/posts/dynamic-experimental-design/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;Optimal experimental design is an area of statistics focused on constructing informative experiments.&#xA;In this tutorial we introduce the necessary tools to construct such informative experiments for dynamic systems using only 100 lines of Julia code.&#xA;We will work with a well-mixed fed-batch bioreactor as an example system. We have quite a bit of domain knowledge how to model the behavior of such a reactor.&#xA;The reactor has three dynamic states: the substrate concentration \(C_s\), the biomass concentration \(C_x\) and the volume of the reactor \(V\).&#xA;The evolution in time of these states is governed by the following differential equations:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About me</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-10/about/</guid>
+      <description>&lt;p&gt;I am a statistical consultant focused on experimental design and other optimal data gathering techniques, particularly for dynamic systems.&lt;/p&gt;&#xA;&lt;p&gt;Often, researchers will perform experiments and only  talk to a statistician afterwards.&#xA;But statisticians are not only useful for data analysis.&#xA;Much time and effort can be saved by carefully planning an experiment.&#xA;Every measurement setup has its own unique details.&#xA;I help other researchers by constructing optimal experiments, custom made for their own measurement setup, goals, and budgetary constraints.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
